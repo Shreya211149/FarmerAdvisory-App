@@ -38,12 +38,26 @@ public class WeatherApiService {
             "South 24 Parganas", new double[]{22.2000, 88.4000}
     );
 
+    public WeatherDataResponse getLatestWeather(String district) {
+
+
+        WeatherData data = weatherRepository
+                .findTopByDistrictOrderByRecordedAtDesc(district.trim())
+                .orElseThrow(() ->
+                        new DistrictNotSupportedException("No weather data for district: " + district)
+                );
+
+        System.out.println("DEBUG: rainfallMm=" + data.getRainfallMm() +
+                ", floodRisk='" + data.getFloodRisk() + "'");
+        return WeatherDataTransformer.toResponse(data);
+    }
+
 
 
     public WeatherDataResponse fetchAndSaveWeather(String district) {
-        district = district.trim();
+        //district = district.trim();
 
-        double[] coords = DISTRICT_COORDS.get(district);
+        double[] coords = DISTRICT_COORDS.get(district.trim());
         if (coords == null) {
             throw new DistrictNotSupportedException("Unsupported district: " + district);
         }
@@ -67,8 +81,8 @@ public class WeatherApiService {
         double rainfallMm = 0.0;
         if (body != null && body.containsKey("rain")) {
             Map<String, Object> rain = (Map<String, Object>) body.get("rain");
-            if (rain.containsKey("1h")) {
-                rainfallMm = ((Number) rain.get("1h")).doubleValue();
+            if (rain.containsKey("3h")) {
+                rainfallMm = ((Number) rain.get("3h")).doubleValue();
             }
         }
 

@@ -45,7 +45,7 @@ public class FarmerService {
                         new FarmerNotFoundException("Farmer not found"));
 
         String token = jwtService.generateToken(farmer.getUsername());
-        return new AuthResponse(token, farmer.getUsername(), "ROLE_FARMER");
+        return new AuthResponse(token, farmer.getUsername(), farmer.getDistrict(), "ROLE_FARMER");
     }
 
     public List<FarmerResponse> getAllFarmers() {

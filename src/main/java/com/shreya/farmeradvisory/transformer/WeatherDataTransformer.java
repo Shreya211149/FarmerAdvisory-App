@@ -17,8 +17,8 @@ public class WeatherDataTransformer {
         return WeatherDataResponse.builder()
                 .id(data.getId())
                 .district(data.getDistrict())
-                .rainfallMm(data.getRainfallMm())
-                .floodRisk(data.getFloodRisk())
+                .rainfallMm(data.getRainfallMm() != null ? data.getRainfallMm() : 0.0)
+                .floodRisk(data.getFloodRisk() != null ? data.getFloodRisk() : "LOW")
                 .recordedAt(data.getRecordedAt())
                 .build();
 

@@ -20,17 +20,12 @@ public class AlertService {
     private final AlertRepository alertRepository;
     private final FarmerRepository farmerRepository;
 
-    public AlertResponse createAlert(AlertRequest request) {
 
-        Farmer farmer = farmerRepository.findById(request.getFarmerId())
-                .orElseThrow(() ->
-                        new FarmerNotFoundException("Farmer not found: " + request.getFarmerId()));
-
-        Alert alert = AlertTransformer.toEntity(request, farmer);
-
-        return AlertTransformer.toResponse(
-                alertRepository.save(alert)
-        );
+    public List<AlertResponse> getAllAlerts() {
+        return alertRepository.findAll()
+                .stream()
+                .map(AlertTransformer::toResponse)
+                .toList();
     }
 
     public List<AlertResponse> getAlertsByDistrict(String district) {
@@ -38,5 +33,14 @@ public class AlertService {
                 .stream()
                 .map(AlertTransformer::toResponse)
                 .toList();
+    }
+
+    public AlertResponse createAlert(AlertRequest request) {
+        Farmer farmer = farmerRepository.findById(request.getFarmerId())
+                .orElseThrow(() ->
+                        new FarmerNotFoundException(
+                                "Farmer not found: " + request.getFarmerId()));
+        Alert alert = AlertTransformer.toEntity(request, farmer);
+        return AlertTransformer.toResponse(alertRepository.save(alert));
     }
 }

@@ -18,8 +18,14 @@ public class WeatherData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(name = "district")
     private String district;
+
+    @Column(name = "rainfall_mm")
     private Double rainfallMm;
+
+    @Column(name = "flood_risk")
     private String floodRisk;
 
     @Builder.Default

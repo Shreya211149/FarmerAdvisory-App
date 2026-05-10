@@ -3,10 +3,7 @@ package com.shreya.farmeradvisory.controller;
 import com.shreya.farmeradvisory.dto.response.WeatherDataResponse;
 import com.shreya.farmeradvisory.service.WeatherApiService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/weather")
@@ -17,6 +14,11 @@ public class WeatherDataController {
     private final WeatherApiService weatherApiService;
 
     // Existing endpoints ...
+
+    @GetMapping("/latest/{district}")
+    public WeatherDataResponse latestWeather(@PathVariable String district) {
+        return weatherApiService.getLatestWeather(district);
+    }
 
     // Manually trigger a live fetch for any district
     @PostMapping("/fetch/{district}")
