@@ -94,14 +94,14 @@ The application will be deployed using a modern cloud-native setup:
 
 ---
 
-### 🗄️ Database
+### Database
 - **Platform:** Aiven  
 - Managed MySQL database
 - Cloud-hosted with automated backups and secure connections
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 **Backend**
 - Java
