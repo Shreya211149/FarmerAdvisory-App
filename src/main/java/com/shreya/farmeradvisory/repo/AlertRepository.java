@@ -11,5 +11,7 @@ import java.util.List;
 public interface AlertRepository extends JpaRepository<Alert, Long> {
     List<Alert> findBySeverity(String severity);
     List<Alert> findByDistrict(String district);
+    List<Alert> findByDistrictOrderBySentAtDesc(String district);
+
     List<Alert> findByFarmer(Farmer farmer);
 }

@@ -16,7 +16,7 @@ public class AlertController {
     private final AlertService alertService;
     private final EvaluationService evaluationService;
 
-    @GetMapping("/district/{district}")          // ← must match exactly
+    @GetMapping("/district/{district}")
     public List<AlertResponse> getByDistrict(@PathVariable String district) {
         return alertService.getAlertsByDistrict(district);
     }

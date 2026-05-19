@@ -29,7 +29,7 @@ public class AlertService {
     }
 
     public List<AlertResponse> getAlertsByDistrict(String district) {
-        return alertRepository.findByDistrict(district)
+        return alertRepository.findByDistrictOrderBySentAtDesc(district)
                 .stream()
                 .map(AlertTransformer::toResponse)
                 .toList();
