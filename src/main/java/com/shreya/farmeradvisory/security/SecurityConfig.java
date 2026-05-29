@@ -45,6 +45,7 @@ public class SecurityConfig {
 
                         // Optional: read-only groups
                         .requestMatchers(HttpMethod.GET, "/api/groups/**").permitAll()
+                        .requestMatchers("/api/weather/forecast/public/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         // Swagger UI endpoints
                         .requestMatchers(

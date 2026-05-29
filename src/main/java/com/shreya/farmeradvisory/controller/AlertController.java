@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/alerts")
@@ -19,6 +20,11 @@ public class AlertController {
     @GetMapping("/district/{district}")
     public List<AlertResponse> getByDistrict(@PathVariable String district) {
         return alertService.getAlertsByDistrict(district);
+    }
+
+    @GetMapping("/history/14days")          // ← add this
+    public Map<String, Object> getAlertHistory() {
+        return alertService.getAlertHistoryLast14Days();
     }
 
     @GetMapping
