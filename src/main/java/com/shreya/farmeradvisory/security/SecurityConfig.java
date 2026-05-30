@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/error").permitAll()
                         // Swagger UI endpoints
                         .requestMatchers(
+                                "/",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**"
